@@ -77,7 +77,15 @@ def get_word_score(word, n):
     returns: int >= 0
     """
     # TO DO...
-    
+    total = 0
+    for letter in word:
+        total = total + SCRABBLE_LETTER_VALUES[letter]
+#        print total
+    total *= len(word)
+    if n == len(word):
+        total += 50
+    return total
+
 #
 # Make sure you understand how this function works and what it does!
 #
@@ -147,6 +155,14 @@ def update_hand(hand, word):
     """
     # TO DO ...
 
+    hand2 = hand.copy()
+
+    for letter in word:
+        hand2[letter] = hand2[letter] - 1
+    return hand2
+
+
+
 #
 # Problem #3: Test word validity
 #
@@ -161,6 +177,18 @@ def is_valid_word(word, hand, word_list):
     word_list: list of lowercase strings
     """
     # TO DO...
+    hand3 = hand.copy()
+    if word not in word_list:
+        return False
+
+    for letter in word:
+        if hand3.get(letter, 0) > 0:
+            hand3[letter] -= 1
+        else:
+            return False
+    return True
+
+
 
 def calculate_handlen(hand):
     handlen = 0
@@ -200,6 +228,9 @@ def play_hand(hand, word_list):
       
     """
     # TO DO ...
+    print hand
+    word = raw_input("Make a word with the above letters.")
+    if word =
 
 #
 # Problem #5: Playing a game
