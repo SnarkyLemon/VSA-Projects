@@ -228,9 +228,31 @@ def play_hand(hand, word_list):
       
     """
     # TO DO ...
-    print hand
-    word = raw_input("Make a word with the above letters.")
-    if word =
+    total = 0
+    while hand > 0:
+        display_hand(hand)
+        word = raw_input("Create a word with the given letters.")
+        if word == ".":
+            break
+        if is_valid_word(word, hand, word_list):
+            total += get_word_score(word, HAND_SIZE)
+            print "The total is now ", total, ". "
+            hand = update_hand(hand, word)
+            print "the hand is now", hand
+        else:
+            print "Not a valid word."
+    print "Your final score is", total, "."
+
+
+
+
+
+
+#word_list = load_words()
+#hand = deal_hand(HAND_SIZE)
+#play_hand(hand, word_list)
+
+
 
 #
 # Problem #5: Playing a game
@@ -252,10 +274,13 @@ def play_game(word_list):
     * If the user inputs anything else, ask them again.
     """
     # TO DO...
-
+    userstart = raw_input("Type 'n' for a new game, press 'r' to play your last hand, and 'e' to exit.")
+    if userstart == "n":
+        play_hand(hand, word_list)
 #
 # Build data structures used for entire session and play game
 #
 if __name__ == '__main__':
     word_list = load_words()
     play_game(word_list)
+
