@@ -161,8 +161,6 @@ def update_hand(hand, word):
         hand2[letter] = hand2[letter] - 1
     return hand2
 
-
-
 #
 # Problem #3: Test word validity
 #
@@ -229,11 +227,9 @@ def play_hand(hand, word_list):
     """
     # TO DO ...
     total = 0
-    while hand > 0:
+    while calculate_handlen(hand) > 0:
         display_hand(hand)
         word = raw_input("Create a word with the given letters.")
-        if word == ".":
-            break
         if is_valid_word(word, hand, word_list):
             total += get_word_score(word, HAND_SIZE)
             print "The total is now ", total, ". "
@@ -244,17 +240,11 @@ def play_hand(hand, word_list):
     print "Your final score is", total, "."
 
 
-
-
-
-
 #word_list = load_words()
 #hand = deal_hand(HAND_SIZE)
 #play_hand(hand, word_list)
 
 
-
-#
 # Problem #5: Playing a game
 # Make sure you understand how this code works!
 # 
@@ -275,12 +265,27 @@ def play_game(word_list):
     """
     # TO DO...
     userstart = raw_input("Type 'n' for a new game, press 'r' to play your last hand, and 'e' to exit.")
+    hand = deal_hand(HAND_SIZE)
+
     if userstart == "n":
+        print "Welcome to the Matrix, Neo."
         play_hand(hand, word_list)
+
+    if userstart == "e":
+        print "Goodbye."
+
+    if userstart == "r":
+        play_hand(hand, word_list)
+
+    if userstart == ".":
+        print "please play again"
+        #  break
+
+
+
 #
 # Build data structures used for entire session and play game
 #
 if __name__ == '__main__':
     word_list = load_words()
     play_game(word_list)
-
